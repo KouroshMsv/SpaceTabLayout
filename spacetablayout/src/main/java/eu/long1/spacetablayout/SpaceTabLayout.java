@@ -28,14 +28,15 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.Tab;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +62,7 @@ public class SpaceTabLayout extends RelativeLayout {
 
     private RelativeLayout parentLayout;
     private RelativeLayout selectedTabLayout;
-    private FloatingActionButton actionButton;
+    private AppCompatImageButton actionButton;
     private ImageView backgroundImage;
     private ImageView backgroundImage2;
 
@@ -102,6 +103,8 @@ public class SpaceTabLayout extends RelativeLayout {
     private int defaultTextColor;
     private int defaultButtonColor;
     private int defaultTabColor;
+    private int defaultIconActiveTint=ContextCompat.getColor(getContext(), android.R.color.black);
+    private int defaultIconNormalTint=ContextCompat.getColor(getContext(), android.R.color.white);
 
     private boolean iconOnly = false;
 
@@ -136,7 +139,7 @@ public class SpaceTabLayout extends RelativeLayout {
         backgroundImage = (ImageView) findViewById(R.id.backgroundImage);
         backgroundImage2 = (ImageView) findViewById(R.id.backgroundImage2);
 
-        actionButton = (FloatingActionButton) findViewById(R.id.fab);
+        actionButton = (AppCompatImageButton) findViewById(R.id.fab);
 
         tabLayout = (TabLayout) findViewById(R.id.spaceTab);
 
@@ -216,6 +219,11 @@ public class SpaceTabLayout extends RelativeLayout {
 
             } else if (attr == R.styleable.SpaceTabLayout_text_color) {
                 defaultTextColor = a.getColor(attr, ContextCompat.getColor(getContext(), android.R.color.primary_text_dark));
+
+            } else if (attr == R.styleable.SpaceTabLayout_icon_active_tint) {
+                defaultIconActiveTint = a.getColor(attr, ContextCompat.getColor(getContext(), android.R.color.black));
+            } else if (attr == R.styleable.SpaceTabLayout_icon_normal_tint) {
+                defaultIconNormalTint = a.getColor(attr, ContextCompat.getColor(getContext(), android.R.color.white));
 
             } else if (attr == R.styleable.SpaceTabLayout_icon_one) {
                 defaultTabOneButtonIcon = a.getDrawable(attr);
@@ -412,33 +420,52 @@ public class SpaceTabLayout extends RelativeLayout {
 
     private void moveTab(List<Integer> tabSize, int position) {
         if (!tabSize.isEmpty()) {
+
+            setImageNormal();
+
+            actionButton.setImageTintList(ColorStateList.valueOf(defaultIconActiveTint));
             float backgroundX = -tabSize.get(2) / 2 + getX(position, tabSize) + 42;
             switch (position) {
                 case 0:
+                    tabOneImageView.setColorFilter(defaultIconActiveTint);
                     actionButton.setImageDrawable(defaultTabOneButtonIcon);
                     actionButton.setOnClickListener(tabOneOnClickListener);
                     break;
                 case 1:
+                    tabTwoImageView.setColorFilter(defaultIconActiveTint);
                     actionButton.setImageDrawable(defaultTabTwoButtonIcon);
                     actionButton.setOnClickListener(tabTwoOnClickListener);
+
                     break;
                 case 2:
+                    tabThreeImageView.setColorFilter(defaultIconActiveTint);
                     actionButton.setImageDrawable(defaultTabThreeButtonIcon);
                     actionButton.setOnClickListener(tabThreeOnClickListener);
                     break;
                 case 3:
+                    tabFourImageView.setColorFilter(defaultIconActiveTint);
                     actionButton.setImageDrawable(defaultTabFourButtonIcon);
                     actionButton.setOnClickListener(tabFourOnClickListener);
+
                     break;
                 case 4:
+                    tabFiveImageView.setColorFilter(defaultIconActiveTint);
                     actionButton.setImageDrawable(defaultTabFiveButtonIcon);
                     actionButton.setOnClickListener(tabFiveOnClickListener);
+
                     break;
 
             }
-
             selectedTabLayout.animate().x(backgroundX).setDuration(100);
         }
+    }
+
+    private void setImageNormal() {
+        tabOneImageView.setColorFilter(defaultIconNormalTint);
+        tabTwoImageView.setColorFilter(defaultIconNormalTint);
+        tabThreeImageView.setColorFilter(defaultIconNormalTint);
+        tabFourImageView.setColorFilter(defaultIconNormalTint);
+        tabFiveImageView.setColorFilter(defaultIconNormalTint);
     }
 
     private float getX(int position, List<Integer> sizesList) {
@@ -593,7 +620,7 @@ public class SpaceTabLayout extends RelativeLayout {
         backgroundImage2.setImageDrawable(image2);
     }
 
-    public FloatingActionButton getButton() {
+    public AppCompatImageButton getButton() {
         return actionButton;
     }
 
