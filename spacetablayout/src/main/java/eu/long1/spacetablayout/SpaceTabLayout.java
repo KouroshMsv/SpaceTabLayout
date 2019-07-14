@@ -28,7 +28,6 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TabLayout.Tab;
@@ -103,8 +102,8 @@ public class SpaceTabLayout extends RelativeLayout {
     private int defaultTextColor;
     private int defaultButtonColor;
     private int defaultTabColor;
-    private int defaultIconActiveTint=ContextCompat.getColor(getContext(), android.R.color.black);
-    private int defaultIconNormalTint=ContextCompat.getColor(getContext(), android.R.color.white);
+    private int defaultIconActiveTint = ContextCompat.getColor(getContext(), android.R.color.black);
+    private int defaultIconNormalTint = ContextCompat.getColor(getContext(), android.R.color.white);
 
     private boolean iconOnly = false;
 
@@ -464,8 +463,10 @@ public class SpaceTabLayout extends RelativeLayout {
         tabOneImageView.setColorFilter(defaultIconNormalTint);
         tabTwoImageView.setColorFilter(defaultIconNormalTint);
         tabThreeImageView.setColorFilter(defaultIconNormalTint);
-        tabFourImageView.setColorFilter(defaultIconNormalTint);
-        tabFiveImageView.setColorFilter(defaultIconNormalTint);
+        if (numberOfTabs > 3)
+            tabFourImageView.setColorFilter(defaultIconNormalTint);
+        if (numberOfTabs > 4)
+            tabFiveImageView.setColorFilter(defaultIconNormalTint);
     }
 
     private float getX(int position, List<Integer> sizesList) {
