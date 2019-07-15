@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +17,14 @@
         android:layout_height="wrap_content"
         app:layout_behavior="eu.long1.spacetablayout.SpaceTabLayoutBehavior"
         app:number_of_tabs="three_IconOnly"
-        app:starting_position="one" />
+        app:starting_position="two"
+        app:icon_active_tint="#ffffff"
+        app:icon_normal_tint="#000"
+        app:tab_color="#ffffff"
+        app:button_color="@color/colorPrimary"
+        app:icon_one="@drawable/ic_tab_five"
+        app:icon_two="@drawable/ic_tab_four"
+        app:icon_three="@drawable/ic_tab_one"
+         />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

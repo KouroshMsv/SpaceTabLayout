@@ -17,10 +17,12 @@
 package eu.long1.spacetablayout;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class SpaceTabLayoutBehavior extends CoordinatorLayout.Behavior<SpaceTabLayout> {

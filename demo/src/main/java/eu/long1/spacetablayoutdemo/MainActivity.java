@@ -1,11 +1,12 @@
 package eu.long1.spacetablayoutdemo;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,10 @@ public class MainActivity extends AppCompatActivity {
 //        fragmentList.add(new FragmentE());
 
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-        tabLayout = (SpaceTabLayout) findViewById(R.id.spaceTabLayout);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.spaceTabLayout);
 
         tabLayout.initialize(viewPager, getSupportFragmentManager(), fragmentList);
-
 
         tabLayout.setOnClickListener(new View.OnClickListener() {
             @Override
